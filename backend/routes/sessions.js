@@ -12,12 +12,14 @@ router.route('/add').post((req, res) => {
   const duration = Number(req.body.duration);
   const tasks_created = Number(req.body.tasks_created);
   const tasks_completed = req.body.tasks_completed;
+  const id = req.body.id;
 
   const newSession = new Session({
     name,
     duration,
     tasks_created,
-    tasks_completed
+    tasks_completed,
+    id
   });
 
   newSession.save()
@@ -44,6 +46,7 @@ router.route('/update/:id').post((req, res) => {
         session.duration = Number(req.body.duration);
         session.tasks_created = Number(req.body.tasks_created);
         session.tasks_completed = Number(req.body.tasks_completed);
+        session.id = req.body.id;
 
         session.save()
         .then(() => res.json('Session updated!'))

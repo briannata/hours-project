@@ -9,13 +9,14 @@ import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
  
 function App() {
- return (
-  <Router>
-    <br/>
-    <Route path="/" exact component={HomePage} />
-    <Route path="/join/:id" component={JoinPage} />
-    <Route path="/session/:id" component={SessionPage} />
-</Router>
+ return ( 
+   <Router>
+      <div className="container">
+        <Route path="/" exact component={HomePage} />
+         <Route path="/join/:id" component={JoinPage} />
+         <Route path="/session/:id" component={SessionPage} />
+      </div>
+   </Router>
  );
 }
  

@@ -56,3 +56,12 @@
 .dark-purple {
   color: #7E1F86;
 }
+
+h1 {
+  color: #7E1F86;
+}
+
+button {
+  background-color: #9D79BC;
+  padding: 14px 16px;
+}
