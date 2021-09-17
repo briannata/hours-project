@@ -10,7 +10,7 @@ The backend of this project uses Node.js and establishes a connection with a Mon
 
 This frontend of this web app is made primarily in React.js and uses three main components as the three pages (home, join, and session pages).
 
-### Home Page
+### 'Home Page'
 
 The home page greets the user and displays a button that will allow the user to navigate to the join page. When the user clicks the button, a session is automatically created and a unique alphanumeric ID will be generated.
 

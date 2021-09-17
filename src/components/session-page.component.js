@@ -8,15 +8,20 @@ export default class SessionPage extends Component {
   constructor(props) {
     super(props);
     this.onChangeTask = this.onChangeTask.bind(this);
+    this.onChangeMinutes = this.onChangeMinutes.bind(this);
     this.state = {
       participants: [this.props.location.state.name],
       tasks: [],
       id: this.props.location.state.id,
       newtask: '',
       checks: [],
-      time: 0
+      initialDate: Date.now(),
+      time: 3600,
+      minutes: 0
     }
     this.addTask = this.addTask.bind(this);
+    this.addMinutes = this.addMinutes.bind(this);
+    this.endSession = this.endSession.bind(this);
     this.myRef = React.createRef();
   }
 
@@ -24,6 +29,19 @@ export default class SessionPage extends Component {
     this.setState({
       newtask: e.target.value
     });
+  }
+
+  onChangeMinutes(e) {
+    this.setState({
+      minutes: parseInt(e.target.value)
+    });
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(() => this.setState({ time: this.state.time - 1}), 1000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   addTask() {
@@ -36,21 +54,14 @@ export default class SessionPage extends Component {
     document.getElementById("txtbox").value = "";
   }
 
-  // participants list
-  // timer
-  // tasks list
-  // optional chat
-  // copy invite code (join instead of session)
-
-  /* 
-  updateDatabase() {
-    tasks = length of tasks + length of completed tasks
-    duration = timer
-    
-
+  addMinutes() {
+    var min = this.state.time + this.state.minutes * 60;
+    this.setState({
+      time: min
+    })
+    this.state.newtask = '';
+    document.getElementById("minbox").value = "";
   }
-  
-  */
 
   endSession() {
     console.log("ending session...");
@@ -75,11 +86,11 @@ export default class SessionPage extends Component {
                 <h4>Tasks</h4>
                 <div  style={{alignItems: "horizontal"}}>
                   <div style={{alignItems: "vertical", float: "left"}}>
-                  {this.state.tasks.map((li, i) => <div><input type="checkbox"></input><br></br></div>)}
-                    </div>
-                    <div  style={{alignItems: "vertical", float: "left"}}>
+                      {this.state.tasks.map((li, i) => <div><input type="checkbox"></input><br></br></div>)}
+                  </div>
+                  <div  style={{alignItems: "vertical", float: "left"}}>
                     <ul>{this.state.tasks.map((li, i) => <li key={i}>{li}</li>)}</ul>
-                      </div>
+                  </div>
                 </div>
                 <div style={{clear: "both"}}></div>
                 <input type="text" id="txtbox" placeholder="add task" onChange={this.onChangeTask} style={{textAlign: "center"}}/>
@@ -94,20 +105,13 @@ export default class SessionPage extends Component {
             </Col>
             <Col>
               <h5>Timer</h5>
+              <p><b>{Math.floor(this.state.time/60)}</b> minutes, <b>{ Math.floor(this.state.time%60)}</b> seconds</p>
+              <input type="text" id="minbox" placeholder="add minutes to timer" onChange={this.onChangeMinutes} style={{textAlign: "center"}}/>
+                <br></br>
+                <br></br>
+                <button onClick={this.addMinutes}>Add Minutes</button>
             </Col>
           </Row>
-          {/* Optional chat
-          <br></br>
-          
-          <Row>
-            <Col>
-              <h4>Chat (optional)</h4>
-              <br></br>
-              <div style={{minHeight: "40vh", border: "1.5px solid black"}}>
-
-              </div>
-            </Col>
-          </Row>*/}
         </Container>
         <br></br>
         <br></br>
