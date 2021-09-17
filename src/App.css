@@ -65,3 +65,15 @@ button {
   background-color: #9D79BC;
   padding: 14px 16px;
 }
+
+.item {
+  color: #A14DA0;
+}
+
+input[type='checkbox']:after {
+  color: #9D79BC;
+}
+
+li {
+  list-style-type: none;
+}

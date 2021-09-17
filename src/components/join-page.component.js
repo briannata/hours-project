@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import history from './history';
 
 export default class JoinPage extends Component {
 
@@ -7,8 +8,9 @@ export default class JoinPage extends Component {
     this.onChangeName = this.onChangeName.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.state = {
-      name: ''
-    };
+      name: '',
+      id: this.props.location.state.id
+    }
   }
 
   onChangeName(e) {
@@ -16,20 +18,18 @@ export default class JoinPage extends Component {
       name: e.target.value
     });
   }
+
   onSubmit(e) {
     e.preventDefault();
-    const newUser = {
+    const data = {
       name: this.state.name,
+      id: this.state.id
     };
-    
-    this.setState({
-      name: ''
-    })
-  }
 
-  joinSession() {
     console.log("joining session...");
-    history.push('/session/' + this.objectid, this.name);
+    console.log(data.name);
+    history.push('/session/' + data.id, {id: data.id, name: data.name});
+    window.location.reload();
   }
 
   render() {
@@ -42,7 +42,9 @@ export default class JoinPage extends Component {
         <br></br>
         <p>Please enter your name below:</p>
         <input type="text" onChange={this.onChangeName}></input>
-        <button onClick={this.joinSession}>Join Session</button>
+        <br></br>
+        <br></br>
+        <button onClick={this.onSubmit}>Join Session</button>
       </div>
     );
   }

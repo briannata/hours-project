@@ -26,7 +26,7 @@ export default class HomePage extends Component {
     axios.post('http://localhost:5000/session/add', newSession)
       .then(res => console.log(res.data));
     // redirect user to join page
-      history.push('/join/' + objectid, this.objectid);
+      history.push('/join/' + objectid, {id: objectid});
       window.location.reload();
     console.log(objectid);
   }
@@ -38,7 +38,7 @@ export default class HomePage extends Component {
         <br></br>
         <h1>Hi there!</h1>
         <br></br>
-        <h3>Welcome to my study session organizer. Our goal is to help you finish your tasks and set aside specific intervals of time to get your work done!</h3>
+        <h3>Welcome to my study session organizer. Our goal is to help you finish your tasks and eliminate procrastination!</h3>
         <br></br>
         <button onClick={this.makeSession} href="/join/[sessionId]">Click here to join a study session!</button>
       </div>
