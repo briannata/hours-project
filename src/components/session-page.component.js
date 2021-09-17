@@ -5,6 +5,7 @@ import '../App.css';
 
 export default class SessionPage extends Component {
 
+  // constructor (binding methods, setting initial state)
   constructor(props) {
     super(props);
     this.onChangeTask = this.onChangeTask.bind(this);
@@ -25,25 +26,31 @@ export default class SessionPage extends Component {
     this.myRef = React.createRef();
   }
 
+// sets this.state.newtask to what is in the add task textbox 
   onChangeTask(e) {
     this.setState({
       newtask: e.target.value
     });
   }
 
+  // sets this.state.minutes to what is in the add minutes textbox
   onChangeMinutes(e) {
     this.setState({
       minutes: parseInt(e.target.value)
     });
   }
 
+  // setting an interval for every second to update this.state.time
   componentDidMount() {
     this.interval = setInterval(() => this.setState({ time: this.state.time - 1}), 1000);
   }
+
+  // clearing the interval when the component is unmounted
   componentWillUnmount() {
     clearInterval(this.interval);
   }
 
+  // add this.state.newtask to the this.state.tasks list, resets task textbox
   addTask() {
     var new_task_list = this.state.tasks;
     new_task_list.push(this.state.newtask);
@@ -54,6 +61,7 @@ export default class SessionPage extends Component {
     document.getElementById("txtbox").value = "";
   }
 
+  // add this.state.minutes to this.state.time, resets minutes textbox
   addMinutes() {
     var min = this.state.time + this.state.minutes * 60;
     this.setState({
@@ -63,8 +71,9 @@ export default class SessionPage extends Component {
     document.getElementById("minbox").value = "";
   }
 
+  // remove participant from participants list, navigate to home
   endSession() {
-    console.log("ending session...");
+    console.log("exiting session...");
     this.setState({
       participants: this.state.participants - [this.props.location.state.name]
     })

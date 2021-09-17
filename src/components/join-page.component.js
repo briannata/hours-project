@@ -3,6 +3,7 @@ import history from './history';
 
 export default class JoinPage extends Component {
 
+  // constructor (binding methods, initializing state)
   constructor(props) {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
@@ -13,12 +14,14 @@ export default class JoinPage extends Component {
     }
   }
 
+  // setting this.state.name to what is in the textbox
   onChangeName(e) {
     this.setState({
       name: e.target.value
     });
   }
 
+  // navigating to session page (and sending id and name data)
   onSubmit(e) {
     e.preventDefault();
     const data = {

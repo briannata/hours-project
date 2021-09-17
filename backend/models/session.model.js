@@ -1,3 +1,5 @@
+// schema for session data in database
+
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
